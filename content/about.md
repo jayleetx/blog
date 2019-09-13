@@ -1,6 +1,10 @@
 ---
-date: "2016-05-05T21:48:51-07:00"
 title: About
+steadyPage: true
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+Hi! I'm a research fellow with the [Early Voting Information Center](https://blogs.reed.edu/earlyvoting/) at [Reed College](https://www.reed.edu/) in Portland, OR. EVIC does research into election sciences, early voting and vote-by-mail, and public opinion, but I'm also interested in statistics and data science. While a student at Reed, I wrote my senior thesis on some of the demographic and electoral impacts of ranked choice voting on voter turnout in San Francisco.
+
+![](/img/sfmayor18_sankey.png) ![](/img/salem_ride.JPG)
+
+Aside from all that, I like to make music^[See: me as Mars above, singing.], go hiking, and bike around Portland.
