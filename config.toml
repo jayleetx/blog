@@ -7,7 +7,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Author] # Used in authorbox
   name = "Jay Lee"
-  bio = "Data visualization, election science, and some bikes and music on the side"
+  bio = "Jay works on election science, data visualization, and reproducibility at the Early Voting Information Center."
   avatar = "img/half_headshot.png"
 
 [menu]

@@ -1,5 +1,6 @@
 ---
 title: "Projects"
+toc: false
 ---
 
 Some of my projects at EVIC are:
