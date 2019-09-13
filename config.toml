@@ -1,42 +1,68 @@
 baseurl = "/"
+title = "Jay's Web Log"
 languageCode = "en-us"
-title = "Finally did it, Lads"
-theme = "hugo-lithium"
-googleAnalytics = ""
-disqusShortname = ""
+paginate = "10" # Number of posts per page
+theme = "mainroad"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-[permalinks]
-    post = "/:year/:month/:day/:slug/"
+[Author] # Used in authorbox
+  name = "Jay Lee"
+  bio = "Data visualization, election science, and some bikes and music on the side"
+  avatar = "img/half_headshot.png"
 
-[[menu.main]]
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  
+  [[menu.main]]
+    identifier = "about"
     name = "About"
     url = "/about/"
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/jayleetx"
-[[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/jaylee_tx"
+    weight = 2
 
-[params]
-    description = "A website built through Hugo and blogdown."
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 3
+  
+  
+[Params]
+  subtitle = "Election science, data viz, and some marginal cycling and music content" # Subtitle of your site. Used in site header
+  description = "Jay Lee's blog" # Site description. Used in meta description
+  copyright = "Jay Lee" # copyright holder, otherwise will use site title
+  opengraph = false # Enable OpenGraph if true
+  twitter_cards = true # Enable Twitter Cards if true
+  readmore = true # Show "Read more" button in list if true
+  authorbox = true # Show authorbox at bottom of pages if true
+  toc = true # Enable Table of Contents
+  post_navigation = true # Show post navigation at bottom of pages if true
+  post_meta = ["date", "categories"] # Order of post meta information
+  mainSections = ["post"] # specify section pages to show on home page and the "Recent articles" widget
+  dateformat = "2006-01-02" # change the format of dates
+  mathjax = true # Enable MathJax
+  mathjaxPath = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js" # Specify MathJax path
+  mathjaxConfig = "TeX-AMS-MML_HTMLorMML" # Specify MathJax config
+  #highlightColor = "#e22d30" # Override highlight color
+  customCSS = ["css/custom.css"] # Include custom CSS files
+  customJS = ["js/custom.js"] # Include custom JS files
 
-    # options for highlight.js (version, additional languages, and theme)
-    highlightjsVersion = "9.12.0"
-    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
-    highlightjsLang = ["r", "yaml"]
-    highlightjsTheme = "github"
+[Params.sidebar]
+  home = "right" # Configure layout for home page
+  list = "left"  # Configure layout for list pages
+  single = false # Configure layout for single pages
+  # Enable widgets in given order
+  widgets = ["search", "recent", "categories", "taglist", "social"]
 
-    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
-    MathJaxVersion = "2.7.5"
+[Params.widgets]
+  recent_num = 5 # Set the number of articles in the "Recent articles" widget
+  tags_counter = false # Enable counter for each tag in "Tags" widget (disabled by default)
 
-    # path to the favicon, under "static"
-    favicon = "favicon.ico"
-
-    [params.logo]
-    url = "logo.png"
-    width = 50
-    height = 50
-    alt = "Logo"
-
+[Params.widgets.social]
+  # Enable parts of social widget
+  twitter = "jaylee_tx"
+  github = "jayleetx"
+  email = "jaylee@reed.edu"
