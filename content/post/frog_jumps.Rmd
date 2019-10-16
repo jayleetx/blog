@@ -3,6 +3,7 @@ title: "Random lilypads"
 author: "Jay Lee"
 date: "10/7/2019"
 output: html_document
+draft: TRUE
 ---
 
 ```{r setup, include=FALSE}
