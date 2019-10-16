@@ -1,0 +1,121 @@
+---
+title: "Random lilypads"
+author: "Jay Lee"
+date: "10/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem statement
+
+Consider a frog, with 10 lilypads in front of it. The frog will choose a lilypad at random (uniformly) in front of it to jump to, and repeat this until it reaches the 10th lilypad. What is the expected number of jumps the frog will make to reach the 10th lilypad?
+
+## Simulation
+
+```{r}
+end <- 10
+trials <- 100000
+hop_vec <- integer(trials)
+
+for (i in seq_len(trials)) {
+  frog <- 0
+  hops <- 0
+  while (frog < end) {
+    front <- (frog + 1):end
+    frog <- front[sample(length(front), size = 1)]
+    hops <- hops + 1
+  }
+  hop_vec[i] <- hops
+}
+
+avg <- mean(hop_vec)
+
+head(hop_vec, 100)
+```
+
+The first 100 iterations of a simulation of the problem are shown above. In the first trial, the frog reached the 10th lilypad in 2 jumps. Over 100,000 simulations, the average number of jumps needed was `r avg`.
+
+## Math stuff
+
+This problem is a great candidate to use a Markov chain to solve. Since being on the 5th lilypad looking at the 10th doesn't depend on the previous hops, we see that the future is independent of the past conditioned on the present.
+
+We see that the probability of being on the last lilypad in $j$ jumps is
+\[
+(\mathbf{P}^j)_{0,10},
+\]
+where $\mathbf{P}$ is the transition matrix that I haven't written down yet. Additionally, the probability of making it to the last lilypad in exactly $j$ jumps is
+\[
+(\mathbf{P}^j)_{0,10} - (\mathbf{P}^{j-1})_{0,10}.
+\]
+We can then compute an exact form for the expected number of jumps, as follows.
+
+```{r}
+k_mat <- function(k) {
+  mat <- matrix(data = numeric((k+1)^2), nrow = k+1,
+                dimnames = list(0:k, 0:k))
+  for (i in seq_len(k)) {
+    mat[i, ] <- c(rep(0, i), rep(1/(k+1-i), k+1-i))
+  }
+  mat[k+1,k+1] <- 1
+  # you can also set this term to be 0
+  
+  return(mat)
+}
+
+library(expm)
+
+k_prob <- function(k) {
+  p_k <- numeric(k)
+  for (i in 1:k) {
+    p_k[i] <- (k_mat(k) %^% i)[1,k+1]
+  }
+  return(c(p_k[1],diff(p_k)))
+  # and then you don't have to do the diff down here, bc you leave after hitting 10
+}
+
+e_k <- function(vec) {
+  k <- length(vec)
+  return(sum(vec * 1:k))
+}
+
+e_k(k_prob(10))
+```
+
+Our simulation above was quite close to the true expected value.
+
+## General $k$
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+max <- 100
+by <- 1
+frog_e <- data.frame(k = seq(to = max, by = by)) %>%
+  mutate(e = sapply(lapply(k, k_prob), e_k))
+
+ggplot(frog_e, aes(x = k, y = e)) + geom_point()
+```
+
+It's the harmonic series! Here's how we got there...
+
+- Make a Markov chain out of the states (0 to k)
+
+- Break the MC up into the transient/recurrent split
+
+- Find $(I - Q)^{-1}$
+
+- Sum the first row to find the expected number of hits at each of the preceding pads, starting from 0
+
+- This first row will have 1 in the first entry, then an increasing harmonic series (1/k, 1/(k-1), ...) in the remaining $k-1$ entries. This is the harmonic series from 1 to $k$.
+    + Which is also expressible in terms of the Stirling numbers (first kind), as \[\frac{1}{n!} {n+1 \brack 2}\]
+
+
+
+## Further notes
+
+- Not sure how all the actual math in this will work out, if I can find a closed form.
+- You can use the law of total expectation here also - the expected value of jumps to 10 is equal to the weighted sums of expected jumps to 10 given the first jump is 1, 2, etc., and the expected jump to 10 given the first jump is $k$ is just the expected jumps to $(10-k)$ starting from 0. There's a recursive thing going on.
