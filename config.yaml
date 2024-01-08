@@ -1,0 +1,20 @@
+baseURL: http://example.com/
+languageCode: en-us
+title: "Jay's Blog"
+theme: paperesque
+copyright: © 2024 Jay Lee
+buildDrafts: yes
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      pygmentsUseClasses: yes
+      unsafe: yes
+params:
+  topmenu:
+    - name: Posts
+      url: posts/
+    - name: About
+      url: about/
+    - name: RSS
+      url: posts/index.xml
