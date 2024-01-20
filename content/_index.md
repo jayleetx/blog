@@ -1,7 +1,9 @@
 ---
-title: "Jay's Blog"
-description: "Working on the blog"
+title: "Blogrolling"
+description: "Working on my writing"
 display_section: posts
 ---
 
-Here's the sidebar, y'all.
+# Hi, I'm Jay
+
+And here's my writing. We'll see together what it ends up being about!
