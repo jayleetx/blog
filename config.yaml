@@ -1,6 +1,6 @@
 baseURL: http://example.com/
 languageCode: en-us
-title: "Jay's Blog"
+title: "Blogrolling"
 theme: paperesque
 copyright: © 2024 Jay Lee
 buildDrafts: yes
