@@ -16,5 +16,5 @@ params:
       url: posts/
     - name: About
       url: about/
-    - name: RSS
-      url: posts/index.xml
+    - name: Subscribe
+      url: subscribe/
